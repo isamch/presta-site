@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: prestashop_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: prestashop
+      MYSQL_USER: prestashop
+      MYSQL_PASSWORD: prestashop
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    ports:
+      - "3306:3306"
+    networks:
+      - prestashop_network
+
+  php:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    container_name: prestashop_php
+    restart: unless-stopped
+    volumes:
+      - ../prestashop:/var/www/html
+      - ../modules:/var/www/html/modules/custom
+      - ../themes:/var/www/html/themes/custom
+    depends_on:
+      - mysql
+    networks:
+      - prestashop_network
+
+  apache:
+    image: httpd:2.4
+    container_name: prestashop_apache
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ../prestashop:/var/www/html
+      - ./apache/vhost.conf:/usr/local/apache2/conf/extra/httpd-vhosts.conf
+    depends_on:
+      - php
+    networks:
+      - prestashop_network
+
+volumes:
+  mysql_data:
+
+networks:
+  prestashop_network:
+    driver: bridge
