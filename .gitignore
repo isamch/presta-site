@@ -1,0 +1,33 @@
+# Environment
+.env
+
+# PrestaShop
+prestashop/admin-dev/
+prestashop/cache/
+prestashop/config/settings.inc.php
+prestashop/var/cache/*
+prestashop/var/logs/*
+prestashop/download/
+prestashop/upload/
+prestashop/img/*
+
+# Composer
+vendor/
+composer.lock
+
+# Docker
+docker/mysql/data/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
