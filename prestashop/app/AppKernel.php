@@ -41,9 +41,9 @@ abstract class AppKernel extends Kernel
 {
     public const VERSION = Version::VERSION;
     public const MAJOR_VERSION_STRING = Version::MAJOR_VERSION_STRING;
-    public const MAJOR_VERSION = Version::MAJOR_VERSION;
-    public const MINOR_VERSION = Version::MINOR_VERSION;
-    public const RELEASE_VERSION = Version::RELEASE_VERSION;
+    public const MAJOR_VERSION = 9;
+    public const MINOR_VERSION = 0;
+    public const RELEASE_VERSION = 3;
 
     /**
      * @var CachedModuleRepository

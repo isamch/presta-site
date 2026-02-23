@@ -1,0 +1,16 @@
+ 
+
+{shop_url}
+
+رسالة من أحد عملاء {shop_name}
+
+Customer Email Address: {email}
+Order ID #:  {order_name}
+الملف المرفق: {attached_file}
+
+رسالة العميل:
+
+{message}
+
+[{shop_name}]({shop_url})
+Powered by [PrestaShop](https://www.prestashop-project.org/)
