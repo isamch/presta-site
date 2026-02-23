@@ -1,0 +1,90 @@
+/**
+ * Custom Nutri Hummingbird Theme Styles
+ * Child theme of Hummingbird
+ */
+
+/* ========================================
+   CUSTOM COLORS
+   ======================================== */
+:root {
+  --nutri-primary: #2ecc71;
+  --nutri-secondary: #27ae60;
+  --nutri-accent: #f39c12;
+  --nutri-text: #2c3e50;
+}
+
+/* ========================================
+   PRODUCT PAGE CUSTOMIZATIONS
+   ======================================== */
+
+/* Delivery info block */
+.product-delivery-info {
+  background-color: #f8f9fa;
+  border-left: 4px solid var(--nutri-primary);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+}
+
+.product-delivery-info h3 {
+  color: var(--nutri-primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.product-delivery-info p {
+  color: var(--nutri-text);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Expiry date display */
+.product-expiry-date {
+  background-color: #fff3cd;
+  border: 1px solid #ffc107;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.product-expiry-date strong {
+  color: #856404;
+  font-weight: 600;
+}
+
+/* ========================================
+   HEADER CUSTOMIZATIONS
+   ======================================== */
+.header-top {
+  background-color: var(--nutri-primary);
+}
+
+/* ========================================
+   BUTTONS CUSTOMIZATIONS
+   ======================================== */
+.btn-primary {
+  background-color: var(--nutri-primary);
+  border-color: var(--nutri-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--nutri-secondary);
+  border-color: var(--nutri-secondary);
+}
+
+/* ========================================
+   RESPONSIVE ADJUSTMENTS
+   ======================================== */
+@media (max-width: 768px) {
+  .product-delivery-info {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+  
+  .product-delivery-info h3 {
+    font-size: 1rem;
+  }
+}
