@@ -10,6 +10,12 @@ prestashop/var/logs/*
 prestashop/download/
 prestashop/upload/
 prestashop/img/*
+prestashop/themes/hummingbird/assets/cache/
+
+# Modules - ignore all except custom modules
+modules/*
+!modules/.gitkeep
+!modules/ps_expirydate/
 
 # Composer
 vendor/
