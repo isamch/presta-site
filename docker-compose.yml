@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: prestashop_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-prestashop}
+      MYSQL_USER: ${MYSQL_USER:-prestashop}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-prestashop}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    networks:
+      - prestashop_network
+    command: --default-authentication-plugin=mysql_native_password
+
+  prestashop:
+    image: prestashop/prestashop:8.1-apache
+    container_name: prestashop_web
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    ports:
+      - "${APACHE_PORT:-8080}:80"
+    environment:
+      DB_SERVER: mysql
+      DB_NAME: ${MYSQL_DATABASE:-prestashop}
+      DB_USER: ${MYSQL_USER:-prestashop}
+      DB_PASSWD: ${MYSQL_PASSWORD:-prestashop}
+      PS_DOMAIN: ${PS_DOMAIN:-localhost:8080}
+      PS_INSTALL_AUTO: 0
+      PS_ENABLE_SSL: 0
+      PS_LANGUAGE: fr
+      PS_COUNTRY: ma
+    volumes:
+      - ../prestashop:/var/www/html
+      - ../modules/ps_expirydate:/var/www/html/modules/ps_expirydate
+      - ../themes/nutrihummingbird:/var/www/html/themes/nutrihummingbird
+    networks:
+      - prestashop_network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: prestashop_phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    ports:
+      - "${PHPMYADMIN_PORT:-8081}:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: ${MYSQL_USER:-prestashop}
+      PMA_PASSWORD: ${MYSQL_PASSWORD:-prestashop}
+    networks:
+      - prestashop_network
+
+volumes:
+  mysql_data:
+    driver: local
+
+networks:
+  prestashop_network:
+    driver: bridge
